@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: sample-service-test-2
+  name: sample-service-test-renamed-2
   description: |
     A service linked to the test data API.
   annotations:
