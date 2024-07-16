@@ -1,6 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
+  custom: test
   name: irma-test-service
   title: Irma Test service
   description: |
