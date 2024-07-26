@@ -18,7 +18,7 @@ metadata:
     github.com/project-slug: RoadieHQ/sample-service
     argocd/app-name: guestbooks
     gitlab.com/project-id: '58334680' 
-    custom: test1
+    prometheus.io/rule: 'test'
   labels:
     label1: test-label
     label2/label2: test-label2
