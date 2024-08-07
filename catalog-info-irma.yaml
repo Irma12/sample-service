@@ -27,7 +27,7 @@ spec:
   type: service
   owner: group:roadiehq/engineering
   lifecycle: experimental
-  nicknames: custom-nickname
+  nicknames: custom-nickname1, custom-nickname2, custom nickname 3
   audience: custom-segment-audience
   system: sample-system
   providesApis:
