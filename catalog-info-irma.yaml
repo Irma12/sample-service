@@ -7,6 +7,7 @@ metadata:
   description: |
     A service for testing Backstage functionality. Cofigured for Bugsnag.
   annotations:
+    segment.io/security-tier: custom-security-tier
     bugsnag.com/project-key: RoadieHQ/93b71ec25fd3e1d803af87d57cea2acd
     bugsnag.com/project-name: Test bugsnag app
     shortcut.com/project-id: '14'
@@ -26,6 +27,8 @@ spec:
   type: service
   owner: group:roadiehq/engineering
   lifecycle: experimental
+  nicknames: custom-nickname
+  audience: custom-segment-audience
   system: sample-system
   providesApis:
     - test-service
