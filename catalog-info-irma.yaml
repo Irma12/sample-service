@@ -8,6 +8,7 @@ metadata:
     A service for testing Backstage functionality. Cofigured for Bugsnag.
   annotations:
     segment.io/security-tier: custom-security-tier
+    terraform.io/version: NekaVer-234-yo/s
     bugsnag.com/project-key: RoadieHQ/93b71ec25fd3e1d803af87d57cea2acd
     bugsnag.com/project-name: Test bugsnag app
     shortcut.com/project-id: '14'
