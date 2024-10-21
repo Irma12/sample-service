@@ -5,7 +5,7 @@ metadata:
   name: irma-test-service
   title: Irma Test service
   description: |
-    A service for testing Backstage functionality. Cofigured for Bugsnag.
+    A service for testing Backstage functionalities. Cofigured for Bugsnag.
   annotations:
     segment.io/security-tier: custom-security-tier
     terraform.io/version: NekaVer-234-yo/s
