@@ -9,7 +9,7 @@ metadata:
   annotations:
     segment.io/security-tier: custom-security-tier
     terraform.io/version: NekaVer-234-yo/s
-    bugsnag.com/project-key: roadiehq/sample-service
+    bugsnag.com/project-key: RoadieHQ/ca22ff37be961bedf7b630799c915392
     bugsnag.com/project-name: Test bugsnag app
     shortcut.com/project-id: '14'
     github.com/public-repository: Public
