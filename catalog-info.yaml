@@ -16,6 +16,7 @@ metadata:
     - test
     - js
     - demo
+    - catalog-template
   annotations:
     github.com/project-slug: RoadieHQ/sample-service
     # The Sentry organization is stored in the app-config.yaml of the Backstage instance.
