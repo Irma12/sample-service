@@ -3,7 +3,7 @@ kind: Component
 metadata:
   custom: test
   name: irma-test-service
-  title: Irma Test service
+  title: Irma Test service edited
   description: |
     A service for testing Backstage functionalities. Cofigured for Bugsnag.
   annotations:
