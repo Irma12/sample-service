@@ -1,0 +1,14 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: now-filter-1
+  description: test the now filter
+spec:
+  type: service
+  owner: user:guest
+  steps:
+    - id: debug-filter
+      name: debug-filter
+      action: debug:log
+      input:
+        message: ${{ '' | now }}
