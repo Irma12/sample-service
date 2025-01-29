@@ -14,7 +14,7 @@ spec:
         appendText:
           type: string
           description: "Text to append to the README"
-          default: "\n## New Section\nThis is a new section added by the scaffolder."
+          default: "This is a new section added by the scaffolder."
         replacePattern:
           type: string
           description: "Pattern to replace in the README file"
@@ -27,14 +27,14 @@ spec:
   steps:
     - id: append-text
       name: Append Text to README
-      action: fs:append
+      action: roadiehq:utils:fs:append
       input:
         path: README.md
         content: "${{ parameters.appendText }}"
 
     - id: replace-text
       name: Replace Placeholder in README
-      action: fs:replace
+      action: roadiehq:utils:fs:replace
       input:
         path: README.md
         find: "${{ parameters.replacePattern }}"
