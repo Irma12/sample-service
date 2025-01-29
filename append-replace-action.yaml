@@ -1,0 +1,46 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: modify-readme
+  title: Modify README
+  description: Appends text and replaces a placeholder in README.md
+spec:
+  owner: team@example.com
+  type: service
+
+  parameters:
+    - title: "Modify README File"
+      properties:
+        appendText:
+          type: string
+          description: "Text to append to the README"
+          default: "\n## New Section\nThis is a new section added by the scaffolder."
+        replacePattern:
+          type: string
+          description: "Pattern to replace in the README file"
+          default: "PLACEHOLDER"
+        replaceWith:
+          type: string
+          description: "Replacement text for the pattern"
+          default: "Actual content"
+
+  steps:
+    - id: append-text
+      name: Append Text to README
+      action: fs:append
+      input:
+        path: README.md
+        content: "${{ parameters.appendText }}"
+
+    - id: replace-text
+      name: Replace Placeholder in README
+      action: fs:replace
+      input:
+        path: README.md
+        find: "${{ parameters.replacePattern }}"
+        replace: "${{ parameters.replaceWith }}"
+
+  output:
+    links:
+      - title: "View README"
+        url: "./README.md"
