@@ -7,7 +7,6 @@ metadata:
 spec:
   owner: roadie
   type: service
-
   parameters:
     - title: PR Data
       properties:
@@ -41,7 +40,7 @@ spec:
           ui:options:
             catalogFilter:
               kind: Group
-        replacePattern:
+          replacePattern:
             type: string
             description: "Pattern to replace in the README file"
             default: "PLACEHOLDER"
