@@ -41,6 +41,14 @@ spec:
           ui:options:
             catalogFilter:
               kind: Group
+        replacePattern:
+            type: string
+            description: "Pattern to replace in the README file"
+            default: "PLACEHOLDER"
+          replaceWith:
+            type: string
+            description: "Replacement text for the pattern"
+            default: "Actual content"
 
   steps:
     - id: fetch-repo
