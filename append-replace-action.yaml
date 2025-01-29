@@ -7,7 +7,6 @@ metadata:
 spec:
   owner: team@example.com
   type: service
-
   parameters:
     - title: "Modify README File"
       properties:
@@ -23,7 +22,6 @@ spec:
           type: string
           description: "Replacement text for the pattern"
           default: "Actual content"
-
   steps:
     - id: append-text
       name: Append Text to README
@@ -31,7 +29,6 @@ spec:
       input:
         path: README.md
         content: "${{ parameters.appendText }}"
-
     - id: replace-text
       name: Replace Placeholder in README
       action: roadiehq:utils:fs:replace
@@ -40,7 +37,10 @@ spec:
           - file: './README.md'
             find: "${{ parameters.replacePattern }}"
             replaceWith: "${{ parameters.replaceWith }}"
+    - id: roadiehq-utils-fs-parse
+      name: backstage request
+      action: fs:read
+      input:
+        path: ./README.md
   output:
-    links:
-      - title: "View README"
-        url: "./README.md"
+    content: '{{ steps.roadiehq-utils-fs-parse.output.content }}'
