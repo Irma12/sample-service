@@ -37,7 +37,7 @@ spec:
       action: roadiehq:utils:fs:replace
       input:
         files:
-          - path: README.md
+          - file: './README.md'
             find: "${{ parameters.replacePattern }}"
             replace: "${{ parameters.replaceWith }}"
   output:
