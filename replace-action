@@ -1,0 +1,22 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: now-filter-1
+  description: test the now filter
+spec:
+  type: service
+  owner: user:guest
+  parameters:
+    templated_text:
+      title: Replacer
+      type: string
+      description: Text you want to use to replace i_want_to_replace_this
+  steps:
+    - id: Replace text in file
+      name: Replace
+      action: roadiehq:utils:fs:replace
+      input:
+        files:
+          - file: './test.yaml'
+            find: 'now-filter-1'
+            replaceWith: ${{ parameters.templated_text }}
