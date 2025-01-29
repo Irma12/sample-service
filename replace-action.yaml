@@ -1,22 +1,35 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: now-filter-1
-  description: test the now filter
+  name: modify-readme-template
+  title: Modify README
+  description: Appends a section and replaces a placeholder in README.md
 spec:
+  owner: team@example.com
   type: service
-  owner: user:guest
+
   parameters:
-    templated_text:
-      title: Replacer
-      type: string
-      description: Text you want to use to replace i_want_to_replace_this
+    - title: "Modify README"
+      properties:
+        appendText:
+          type: string
+          description: "Text to append to the README"
+          default: "\n## New Section\nThis is a new section added by the scaffolder."
+        replacePattern:
+          type: string
+          description: "Pattern to replace"
+          default: "PLACEHOLDER"
+        replaceWith:
+          type: string
+          description: "Replacement text"
+          default: "Actual content"
+
   steps:
-    - id: Replace text in file
-      name: Replace
-      action: roadiehq:utils:fs:replace
+    - id: modify-readme
+      name: Modify README
+      action: custom:modify-readme
       input:
-        files:
-          - file: './test.yaml'
-            find: 'now-filter-1'
-            replaceWith: ${{ parameters.templated_text }}
+        filePath: "README.md"
+        appendText: "${{ parameters.appendText }}"
+        replacePattern: "${{ parameters.replacePattern }}"
+        replaceWith: "${{ parameters.replaceWith }}"
