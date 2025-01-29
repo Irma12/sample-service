@@ -5,42 +5,79 @@ metadata:
   title: Modify README
   description: Appends text and replaces a placeholder in README.md
 spec:
-  owner: team@example.com
+  owner: roadie
   type: service
+
   parameters:
-    - title: "Modify README File"
+    - title: PR Data
       properties:
-        appendText:
+        repository:
+          title: Repository name
           type: string
-          description: "Text to append to the README"
-          default: "This is a new section added by the scaffolder."
-        replacePattern:
+          description: The name of the repository
+        org:
+          title: Repository Organisation
           type: string
-          description: "Pattern to replace in the README file"
-          default: "PLACEHOLDER"
-        replaceWith:
+          description: The Github org that the repository is in
+        pr_branch:
+          title: PR Branch
           type: string
-          description: "Replacement text for the pattern"
-          default: "Actual content"
+          description: The new branch to make a pr from
+    - title: Append content
+      properties:
+        path:
+          title: Path
+          type: string
+          description: The path to the file you want to append this content to in the scaffolder workspace
+        name:
+          title: Name
+          type: string
+          description: The some name
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            catalogFilter:
+              kind: Group
+
   steps:
-    - id: append-text
-      name: Append Text to README
+    - id: fetch-repo
+      name: Fetch repo
+      action: fetch:plain
+      input:
+        url: https://github.com/${{ parameters.org }}/${{ parameters.repository }}
+    - id: append-file
+      name: Append To File Or Create New
       action: roadiehq:utils:fs:append
       input:
-        path: README.md
-        content: "${{ parameters.appendText }}"
+        path: ${{ parameters.path }}
+        content: "test name: ${{ parameters.name }}\n
+          test owner1: ${{ parameters.owner | replace(\"group:roadiehq/\", \"\") }}\n
+          test owner2: ${{ parameters.owner | replace(\"group:.*/\", \"\") }}\n
+          test owner3: ${{ parameters.owner | replace(\"group\", \"poop\") }}\n"
+
+    - id: publish-pr
+      name: Publish PR
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?repo=${{ parameters.repository }}&owner=${{ parameters.org }}
+        branchName:  ${{ parameters.pr_branch }}
+        title: "Add test content to ${{ parameters.owner | replace(\"group:.*/\", \"\") }}"
+        description: Test append or create file
+
     - id: replace-text
       name: Replace Placeholder in README
       action: roadiehq:utils:fs:replace
       input:
         files:
-          - file: './README.md'
+          - file: ${{ parameters.path }}
             find: "${{ parameters.replacePattern }}"
             replaceWith: "${{ parameters.replaceWith }}"
-    - id: roadiehq-utils-fs-parse
-      name: backstage request
-      action: fs:read
+            
+    - id: log-message
+      name: Log PR URL
+      action: debug:log
       input:
-        path: ./README.md
-  output:
-    content: '{{ steps.roadiehq-utils-fs-parse.output.content }}'
+        message: "RemoteURL: ${{ steps[\"publish-pr\"].output.remoteUrl }} owner - ${{ parameters.owner | replace(\"group:.*/\", \"\") }}"
