@@ -36,11 +36,10 @@ spec:
       name: Replace Placeholder in README
       action: roadiehq:utils:fs:replace
       input:
-        files: 
-          - README.md
-        find: "${{ parameters.replacePattern }}"
-        replace: "${{ parameters.replaceWith }}"
-     
+        files:
+          - path: README.md
+            find: "${{ parameters.replacePattern }}"
+            replace: "${{ parameters.replaceWith }}"
   output:
     links:
       - title: "View README"
