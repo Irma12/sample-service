@@ -39,7 +39,7 @@ spec:
         files:
           - file: './README.md'
             find: "${{ parameters.replacePattern }}"
-            replace: "${{ parameters.replaceWith }}"
+            replaceWith: "${{ parameters.replaceWith }}"
   output:
     links:
       - title: "View README"
