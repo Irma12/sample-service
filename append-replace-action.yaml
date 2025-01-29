@@ -21,7 +21,7 @@ spec:
         pr_branch:
           title: PR Branch
           type: string
-          description: The new branch to make a pr from
+          description: The new branch to make a PR from
     - title: Append content
       properties:
         path:
@@ -31,7 +31,7 @@ spec:
         name:
           title: Name
           type: string
-          description: The some name
+          description: Some name
         owner:
           title: Owner
           type: string
@@ -41,12 +41,14 @@ spec:
             catalogFilter:
               kind: Group
         replacePattern:
+          title: Replace Pattern
           type: string
-          description: "Pattern to replace in the README file"
+          description: Pattern to replace in the README file
           default: "PLACEHOLDER"
         replaceWith:
+          title: Replace With
           type: string
-          description: "Replacement text for the pattern"
+          description: Replacement text for the pattern
           default: "Actual content"
 
   steps:
@@ -55,18 +57,19 @@ spec:
       action: fetch:plain
       input:
         url: https://github.com/${{ parameters.org }}/${{ parameters.repository }}
-        
+
     - id: append-file
       name: Append To File Or Create New
       action: roadiehq:utils:fs:append
       input:
         path: ${{ parameters.path }}
-        content: "test name: ${{ parameters.name }}\n
-          test owner1: ${{ parameters.owner | replace(\"group:roadiehq/\", \"\") }}\n
-          test owner2: ${{ parameters.owner | replace(\"group:.*/\", \"\") }}\n
-          test owner3: ${{ parameters.owner | replace(\"group\", \"poop\") }}\n"
-          
-     - id: replace-text
+        content: |
+          test name: ${{ parameters.name }}
+          test owner1: ${{ parameters.owner | replace("group:roadiehq/", "") }}
+          test owner2: ${{ parameters.owner | replace("group:.*/", "") }}
+          test owner3: ${{ parameters.owner | replace("group", "poop") }}
+
+    - id: replace-text
       name: Replace Placeholder in README
       action: roadiehq:utils:fs:replace
       input:
@@ -75,17 +78,17 @@ spec:
             find: "${{ parameters.replacePattern }}"
             replaceWith: "${{ parameters.replaceWith }}"
 
-      - id: publish-pr
-        name: Publish PR
-        action: publish:github:pull-request
-        input:
-          repoUrl: github.com?repo=${{ parameters.repository }}&owner=${{ parameters.org }}
-          branchName:  ${{ parameters.pr_branch }}
-          title: "Add test content to ${{ parameters.owner | replace(\"group:.*/\", \"\") }}"
-          description: Test append or create file
+    - id: publish-pr
+      name: Publish PR
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?repo=${{ parameters.repository }}&owner=${{ parameters.org }}
+        branchName: ${{ parameters.pr_branch }}
+        title: "Add test content to ${{ parameters.owner | replace("group:.*/", "") }}"
+        description: Test append or create file
 
-      - id: log-message
-        name: Log PR URL
-        action: debug:log
-        input:
-          message: "RemoteURL: ${{ steps[\"publish-pr\"].output.remoteUrl }} owner - ${{ parameters.owner | replace(\"group:.*/\", \"\") }}"
+    - id: log-message
+      name: Log PR URL
+      action: debug:log
+      input:
+        message: "RemoteURL: ${{ steps[\"publish-pr\"].output.remoteUrl }} owner - ${{ parameters.owner | replace(\"group:.*/\", \"\") }}"
