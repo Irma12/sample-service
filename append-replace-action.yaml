@@ -64,14 +64,15 @@ spec:
           test owner1: ${{ parameters.owner | replace(\"group:roadiehq/\", \"\") }}\n
           test owner2: ${{ parameters.owner | replace(\"group:.*/\", \"\") }}\n
           test owner3: ${{ parameters.owner | replace(\"group\", \"poop\") }}\n"
+          
      - id: replace-text
-        name: Replace Placeholder in README
-        action: roadiehq:utils:fs:replace
-        input:
-          files:
-            - file: ${{ parameters.path }}
-              find: "${{ parameters.replacePattern }}"
-              replaceWith: "${{ parameters.replaceWith }}"
+      name: Replace Placeholder in README
+      action: roadiehq:utils:fs:replace
+      input:
+        files:
+          - file: ${{ parameters.path }}
+            find: "${{ parameters.replacePattern }}"
+            replaceWith: "${{ parameters.replaceWith }}"
 
     - id: publish-pr
       name: Publish PR
