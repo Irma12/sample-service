@@ -7,7 +7,6 @@ metadata:
   tags:
     - test
     - test2
-    - test3
   description: |
     A service for testing Backstage functionalities. Cofigured for Bugsnag.
   annotations:
