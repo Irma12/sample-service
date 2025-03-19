@@ -28,7 +28,7 @@ metadata:
     label1: test-label
     label2/label2: test-label2
 spec:
-  test: irma
+  test: 1
   type: service
   owner: group:roadiehq/engineering
   lifecycle: experimental
