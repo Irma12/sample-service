@@ -17,6 +17,7 @@ metadata:
     github.com/public-repository: Public
     backstage.io/techdocs-ref: dir:.
     roadie.io/techinsights-shortcut-id: "9229"
+    travis-ci.com/repo-slug: RoadieHQ/sample-service
     datadog.eu/tag-name: sample-service
     pagerduty.com/service-id: P2RXCGR
     github.com/project-slug: RoadieHQ/sample-service
