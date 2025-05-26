@@ -4,6 +4,7 @@ metadata:
   name: sample-graphql-api
 spec:
   type: graphql
+  audience: test-audience
   lifecycle: production
   owner: group:default/engineering
   definition:
