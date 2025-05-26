@@ -30,6 +30,7 @@ metadata:
     label2/label2: test-label2
 spec:
   test: 1
+  audience: test
   type: service
   owner: group:roadiehq/engineering
   lifecycle: experimental
