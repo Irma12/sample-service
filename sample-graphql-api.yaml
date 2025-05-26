@@ -5,6 +5,7 @@ metadata:
 spec:
   type: graphql
   audience: test-audience
+  custom: test
   lifecycle: production
   owner: group:default/engineering
   definition:
