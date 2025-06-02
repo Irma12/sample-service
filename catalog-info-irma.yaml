@@ -31,7 +31,7 @@ metadata:
 spec:
   test: 1
   type: service
-  owner: group:roadiehq/engineering
+  owner: ""
   lifecycle: experimental
   nicknames: custom-nickname1, custom-nickname2, custom nickname 3
   audience: custom-segment-audience
